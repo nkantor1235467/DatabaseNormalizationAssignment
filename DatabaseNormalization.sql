@@ -25,8 +25,35 @@ INSERT INTO Parks_Info (ParkName, Facilities) VALUES
 --This command creates a table with 2 columns, a primary key column called ParkID and a column of the character type called ParkName
 CREATE TABLE Parks (
     --creates a primary key column called ParkID
-    ParkID SERIAL PRIMARY KEY
+    ParkID SERIAL PRIMARY KEY,
     --creates a column of character type called ParkName
     ParkName VARCHAR(255)
 );
 
+--This command creates a table called Facilities
+CREATE TABLE Facilities(
+    --creates a primary key column called FacilityID
+    FacilityID SERIAL PRIMARY KEY,
+    --creates a column called ParkID of the integer type
+    ParkID INT,
+    --creates a column called FacilityName of the character type
+    FacilityName VARCHAR(255),
+    --creates a foreign key which maps the ParkID column in this table to the one in the Parks table
+    FOREIGN KEY (ParkID) REFERENCES Parks(ParkID)
+);
+
+--This command populates the table Parks with the park names
+INSERT INTO Parks (ParkName) VALUES
+('Central Park'),
+('Liberty Park'),
+('Riverside Park');
+
+--This command populates the table Facilities with the park ID numbers and the facility names
+INSERT INTO Facilities (ParkID, FacilityName) VALUES
+(1, 'Playground'),
+(1, 'Restroom'),
+(1, 'Picnic area'),
+(2, 'Restroom'),
+(2, 'Picnic area'),
+(3, 'Playground'),
+(3,'Bike Path');
