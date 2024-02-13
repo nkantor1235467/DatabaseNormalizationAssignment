@@ -57,3 +57,28 @@ INSERT INTO Facilities (ParkID, FacilityName) VALUES
 (2, 'Picnic area'),
 (3, 'Playground'),
 (3,'Bike Path');
+
+--Part 2: Advancing to 2NF
+
+--This command creates a table called ParkFacilities
+CREATE TABLE ParkFacilities (
+    --creates a primary key column called FacilityID
+    FacilityID  SERIAL PRIMARY KEY,
+    --creates a column called FacilityName of the character type
+    FacilityName VARCHAR(255)
+);
+
+--This command modifies the Facilities table by adding a column called ParkFacilityID
+ALTER TABLE Facilities ADD COLUMN ParkFacilityID INT;
+
+--This command alters the Facilities table
+ALTER TABLE Facilities
+--adds a constraint called fk_parkfacilityid which establishes a link between ParkFacilityID column in the Facilities table and the FacilityID column in the ParkFacilities table
+ADD CONSTRAINT fk_parkfacilityid FOREIGN KEY (ParkFacilityID) REFERENCES ParkFacilities(FacilityID);
+
+--This command updates the Facilities table and adds a foreign key constraint to lock the relation between the FacilityName columns in the Facilities and ParkFacilities tables
+UPDATE Facilities
+SET ParkFacilityID = (SELECT FacilityID FROM ParkFacilities WHERE FacilityName = Facilities.FacilityName);
+
+--Deletes the FacilityName column from the Facilities table
+ALTER TABLE Facilities DROP COLUMN FacilityName;

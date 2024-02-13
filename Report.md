@@ -15,3 +15,4 @@ Here is the screenshot showing the Parks table ![This image shows the PGadmin GU
 Here is the screenshot showing the Facilities table ![This image shows the PGadmin GUI. In the bottom panel is the Facilities table and in the panel above is the query used to create it.](/Facilities.png)
 
 ## Part 2:
+This part involved updating the 1NF tables created in the previous section to 2NF. This was necessary because the Facilities table created in the previous section had a column FacilityName which could be predicted by another column called FacilityID. This meant that the FacilityName column was redundant.
